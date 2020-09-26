@@ -1,17 +1,15 @@
+# frozen_string_literal: true
+
 class UrlsController < ApplicationController
-  def new
-
-  end
-
   def create
-    url = Url.create!(url_params)
+    url = Url.find_or_create_by(url_params)
     render json: url
-  rescue => e
+  rescue StandardError => e
     render json: { error: e }, status: :bad_request
   end
 
   def show
-    redirect_to "//#{Url.find_by_short_url(params[:id]).full_url}"
+    redirect_to "//#{Url.find_by(short_url: params[:id]).full_url}"
   end
 
   private

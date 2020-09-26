@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Url < ApplicationRecord
-  validates :full_url, :short_url, presence: true, uniqueness: true
+  validates :full_url, :short_url, presence: true
 
   before_validation do
     self.short_url = create_short_url
@@ -10,7 +12,7 @@ class Url < ApplicationRecord
   def create_short_url
     short = SecureRandom.hex(4)
     attempts = 0
-    while Url.where(short_url: short).exists? && attempts < 10
+    while Url.exists?(short_url: short) && attempts < 10
       short = SecureRandom.hex(4)
       attempts += 1
     end

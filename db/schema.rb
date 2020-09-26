@@ -24,8 +24,7 @@ ActiveRecord::Schema.define(version: 2020_09_21_213719) do
     t.string "short_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["full_url"], name: "index_urls_on_full_url"
-    t.index ["short_url"], name: "index_urls_on_short_url"
+    t.index ["full_url", "short_url"], name: "index_urls_on_full_url_and_short_url", unique: true
   end
 
 end
