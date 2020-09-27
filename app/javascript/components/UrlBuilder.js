@@ -53,18 +53,27 @@ class UrlBuilder extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <div className='errors'>
-          <p>{this.state.errors}</p>
+        <div clasName='container'>
+          <div className='col-6 offset-md-3'>
+            <h1 className='text-center'>URL Shortener</h1>
+            <form>
+              <div>
+                <input placeholder='Enter URL' className='url-field w-100'/>
+              </div>
+              <div className='text-center'>
+                <button onClick={this.createUrl} className='btn btn-primary mt-1'>Submit</button>
+              </div>
+            </form>
+            <div className='errors text-danger'>
+              <p>{this.state.errors}</p>
+            </div>
+            <div className='short-url'>
+              <p className='short-url-display'>
+                <a href={this.state.shortUrl} target='_blank'>{this.state.shortUrl}</a>
+              </p>
+            </div>
+          </div>
         </div>
-        <div className='short-url'>
-          <p className='short-url-display'>
-            <a href={this.state.shortUrl} target='_blank'>{this.state.shortUrl}</a>
-          </p>
-        </div>
-        <form>
-          <input placeholder='Enter URL' className='url-field'/>
-          <button onClick={this.createUrl}>Submit</button>
-        </form>
       </React.Fragment>
     );
   }
