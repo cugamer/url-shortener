@@ -2,7 +2,7 @@
 
 class UrlsController < ApplicationController
   def create
-    url = Url.find_or_create_by(url_params)
+    url = Url.find_or_create_by!(url_params)
     render json: url
   rescue StandardError => e
     render json: { error: e }, status: :bad_request
