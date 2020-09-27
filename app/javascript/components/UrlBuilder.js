@@ -3,9 +3,10 @@ import React from "react"
 class UrlBuilder extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { shortUrl: '', errors: '' };
+    this.state = { shortUrl: '', errors: '', fieldValue: '' };
   }
 
+  handleChange = (e) => this.setState({ fieldValue: e.target.value});
   
   createShortUrl = path => `${location.origin}/urls/${path}`;
 
@@ -25,7 +26,7 @@ class UrlBuilder extends React.Component {
   createUrl = (e) => {
     if (e.preventDefault) e.preventDefault();
 
-    const val = this.removeProtocol(document.querySelector('.url-field').value);
+    const val = this.removeProtocol(this.state.fieldValue);
     if (this.validateUrlFormat(val)) {
       this.setState({ errors: 'Entered value is improperly formatted', shortUrl: '' });
       return;
@@ -42,23 +43,24 @@ class UrlBuilder extends React.Component {
       headers: {"Content-type": "application/json; charset=UTF-8"}
     });
 
-    if(response.ok) {
+    if (response.ok) {
       const json = await response.json();
       this.setState({shortUrl: this.createShortUrl(json.short_url)});
     } else {
-      console.log("Response was bad");
+      const json = await response.json();
+      this.setState({ errors: json.error })
     }
   }
 
   render () {
     return (
       <React.Fragment>
-        <div clasName='container'>
+        <div className='container'>
           <div className='col-6 offset-md-3'>
             <h1 className='text-center'>URL Shortener</h1>
             <form>
               <div>
-                <input placeholder='Enter URL' className='url-field w-100'/>
+                <input type='text' placeholder='Enter URL' className='url-field w-100' value={this.state.value} onChange={this.handleChange} />
               </div>
               <div className='text-center'>
                 <button onClick={this.createUrl} className='btn btn-primary mt-1'>Submit</button>
