@@ -14,8 +14,8 @@ gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
 gem 'react-rails', '~> 2.6.1'
+gem 'webpacker', '~> 4.0'
 # https://github.com/reactjs/react-rails
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
@@ -64,4 +64,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem "bootstrap", "~> 4.5"
+gem 'bootstrap', '~> 4.5'
